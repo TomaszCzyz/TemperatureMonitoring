@@ -1,8 +1,9 @@
-use crate::notification_manager::{Notification};
+use crate::notification_manager::{Event};
 
-struct AtmosphereData {
-    temperature: f32,
-    humidity: u32,
+#[derive(Debug)]
+pub struct AtmosphereData {
+    pub temperature: f32,
+    pub humidity: u32,
 }
 
 struct ConditionsComparer {
@@ -12,11 +13,11 @@ struct ConditionsComparer {
 }
 
 impl ConditionsComparer {
-    fn check_temp_diff(&mut self) -> Option<Notification> {
+    fn check_temp_diff(&mut self) -> Option<Event> {
         let (temp_inside, temp_outside) = (self.weather.temperature, self.home.temperature);
 
         if temp_outside > temp_inside {
-            return Some(Notification::CloseWindow { temp_outside, temp_inside });
+            return Some(Event::CloseWindow { temp_outside, temp_inside });
         }
 
         None

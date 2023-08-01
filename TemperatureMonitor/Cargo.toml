@@ -16,4 +16,5 @@ tracing-appender = "0.2"
 config = { version = "0.13", features = ["toml"] }
 lazy_static = "1.4"
 parse_duration = "2.1.1"
-#anyhow = "1.0"
+async-trait = "0.1.72"
+rand = "0.8"

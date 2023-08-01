@@ -1,72 +1,78 @@
 use std::env;
+use std::error::Error;
 use std::path::PathBuf;
-use std::sync::RwLock;
 use std::time::Duration;
 
-use config::Config;
-use parse_duration::parse::Error;
-use tokio::fs::File;
+use async_trait::async_trait;
+use config::{Config, ConfigBuilder, File, FileFormat};
+use config::builder::DefaultState;
 use tokio::io::AsyncReadExt;
 use tokio::time;
+
+use crate::conditions_comparer::AtmosphereData;
+use crate::fake_weather_provider::FakeWeatherProvider;
 use crate::home_info_provider::HomeInfoProvider;
 
-use crate::weather_provider::OpenWeatherProvider;
-
-pub mod open_weather_models;
-mod weather_provider;
+mod open_weather_provider;
 mod home_info_provider;
 mod conditions_comparer;
 mod notification_manager;
+mod fake_weather_provider;
 
-lazy_static::lazy_static! {
-    static ref SETTINGS: RwLock<Config> = RwLock::new({
-        let mut settings = Config::builder()
-            .add_source(config::File::with_name("Settings"))
-            .build()
-            .unwrap();
+fn get_config() -> Config {
+    ConfigBuilder::<DefaultState>::default()
+        .add_source(File::new("Settings", FileFormat::Toml))
+        .build()
+        .unwrap()
+}
 
-        settings
-    });
+#[async_trait]
+pub trait WeatherProvider {
+    async fn get_current(&self) -> Result<AtmosphereData, Box<dyn Error>>;
 }
 
 #[tokio::main]
-async fn main() -> Result<(), Error> {
+async fn main() -> Result<(), Box<dyn Error>> {
     setup_logging();
-    println!("{:?}", SETTINGS.read().unwrap());
 
-    let mut apikey = String::new();
-    let mut file = File::open("open-weather-api-key").await.unwrap();
-    file.read_to_string(&mut apikey).await.unwrap();
+    // let apikey = get_api_key().await;
+    // let weather_provider = OpenWeatherProvider {
+    //     url: "https://api.openweathermap.org/data/2.5/weather".to_string(),
+    //     api_key: apikey,
+    //     location: open_weather_provider::Location { lat: 50.078613883148385, lon: 21.99193609164846 },
+    // };
 
-    let open_weather_provider = OpenWeatherProvider {
-        url: "https://api.openweathermap.org/data/2.5/weather".to_string(),
-        api_key: apikey,
-        location: weather_provider::Location { lat: 50.078613883148385, lon: 21.99193609164846 },
-    };
-
+    let weather_provider = FakeWeatherProvider;
     let home_info_provider = HomeInfoProvider {
         default_temp: 21f32,
     };
 
     loop {
-        let duration = parse_duration_from_settings()?;
+        let config = get_config();
+        println!("{:?}", config);
+
+        let duration = parse_duration(config)?;
         println!("parsed duration: {duration:?}");
         time::sleep(duration).await;
 
-        let weather_model = open_weather_provider.get_current().await.unwrap();
-        let home_temp = home_info_provider.get_current_temp();
+        let outside = weather_provider.get_current().await.unwrap();
+        let inside = home_info_provider.get_current_temp().await.unwrap();
 
-
-
-        // tokio::spawn(get_weather());
+        println!("{:?}\n{:?}", outside, inside);
     }
 }
 
-fn parse_duration_from_settings() -> Result<Duration, Error> {
-    parse_duration::parse(
-        &SETTINGS.read()
-            .unwrap()
-            .get::<String>("temperature_checks_frequency").expect("Error: Unable to get duration string"))
+fn parse_duration(config: Config) -> Result<Duration, Box<dyn Error>> {
+    let config_value = &config.get::<String>("temperature_checks_frequency")?;
+
+    parse_duration::parse(config_value).map_err(|e| Box::try_from(e).unwrap())
+}
+
+async fn get_api_key() -> String {
+    let mut apikey = String::new();
+    let mut file = tokio::fs::File::open("open-weather-api-key").await.unwrap();
+    file.read_to_string(&mut apikey).await.unwrap();
+    apikey
 }
 
 fn setup_logging() {

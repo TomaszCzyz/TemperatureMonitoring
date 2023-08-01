@@ -1,16 +1,16 @@
 use std::fmt::{Display, Formatter};
 
-pub enum Notification {
+pub enum Event {
     CloseWindow { temp_outside: f32, temp_inside: f32 },
     OpenWindow { temp_outside: f32, temp_inside: f32 },
 }
 
-impl Display for Notification {
+impl Display for Event {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         let message = match self {
-            Notification::CloseWindow { temp_inside, temp_outside }
+            Event::CloseWindow { temp_inside, temp_outside }
             => format!("Temperature outside({temp_outside}) is higher than inside ({temp_inside})... close windows! "),
-            Notification::OpenWindow { temp_inside, temp_outside }
+            Event::OpenWindow { temp_inside, temp_outside }
             => format!("Temperature outside({temp_outside}) is lower than inside ({temp_inside})... open windows! "),
         };
         write!(f, "{}", message)
@@ -18,11 +18,11 @@ impl Display for Notification {
 }
 
 pub struct NotificationManager {
-    last_notification: Notification,
+    last_notification: Event,
 }
 
 impl NotificationManager {
-    fn notify(event: Notification) {
+    fn notify(event: Event) {
         println!("{}", event)
     }
 }
