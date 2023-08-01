@@ -1,4 +1,4 @@
-use crate::conditions_comparer::AtmosphereData;
+use crate::AtmosphereData;
 
 pub struct HomeInfoProvider {
     pub(crate) default_temp: f32,

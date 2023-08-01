@@ -3,7 +3,7 @@ use std::error::Error;
 use async_trait::async_trait;
 use rand::Rng;
 
-use crate::conditions_comparer::AtmosphereData;
+use crate::AtmosphereData;
 use crate::WeatherProvider;
 
 pub struct FakeWeatherProvider;

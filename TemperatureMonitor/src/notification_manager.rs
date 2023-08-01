@@ -1,4 +1,5 @@
 use std::fmt::{Display, Formatter};
+use notify_rust::Notification;
 
 pub enum Event {
     CloseWindow { temp_outside: f32, temp_inside: f32 },
@@ -18,13 +19,22 @@ impl Display for Event {
 }
 
 pub struct NotificationManager {
-    last_notification: Event,
+    last_notification: Option<Event>,
 }
 
 impl NotificationManager {
-    fn notify(event: Event) {
-        println!("{}", event)
+    pub fn new() -> Self {
+        Self {
+            last_notification: None
+        }
+    }
+
+    pub fn notify(&self, event: Event) -> Option<()> {
+        Notification::new()
+            .summary("Close your windows!")
+            .body(&format!("{}", event))
+            .icon("firefox")
+            .show()
+            .ok()
     }
 }
-
-impl NotificationManager {}

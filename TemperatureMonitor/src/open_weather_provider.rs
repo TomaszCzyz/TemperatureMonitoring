@@ -1,10 +1,9 @@
 use std::error::Error;
+
 use async_trait::async_trait;
-
 use serde::{Deserialize, Serialize};
-use crate::conditions_comparer::AtmosphereData;
 
-use crate::WeatherProvider;
+use crate::{AtmosphereData, WeatherProvider};
 
 #[derive(Serialize, Deserialize)]
 pub struct OpenWeatherModel {
