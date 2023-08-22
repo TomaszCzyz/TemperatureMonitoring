@@ -3,6 +3,7 @@ use std::error::Error;
 use std::path::PathBuf;
 
 use async_trait::async_trait;
+use directories::ProjectDirs;
 use tokio::io::AsyncReadExt;
 use tokio::time;
 
@@ -31,9 +32,26 @@ pub struct AtmosphereData {
 }
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn Error>> {
+async fn main() {
     setup_logging();
-    let mut settings = Settings::new("Settings".into());
+
+    let path = match ProjectDirs::from("", "VBest", "OpenWindows") {
+        Some(proj_dirs) => {
+            let local_data = proj_dirs.data_local_dir();
+            let settings_path = local_data.join("Settings.toml");
+
+            if !settings_path.exists() {
+                return println!("settings file does not exists");
+            } else {
+                settings_path.to_string_lossy().into_owned()
+            }
+        }
+        None => {
+            return println!("unable to get settings directory");
+        }
+    };
+
+    let mut settings = Settings::new(&path);
 
     // let apikey = get_api_key().await;
     // let weather_provider = OpenWeatherProvider {
@@ -50,7 +68,14 @@ async fn main() -> Result<(), Box<dyn Error>> {
     };
 
     loop {
-        time::sleep(settings.parse_duration()?).await;
+        let duration = match settings.duration() {
+            Ok(dur) => dur,
+            Err(e) => {
+                println!("could not get duration, {}", e);
+                return;
+            }
+        };
+        time::sleep(duration).await;
 
         let outside = weather_provider.get_current().await.unwrap();
         let inside = home_info_provider.get_current_temp().await.unwrap();

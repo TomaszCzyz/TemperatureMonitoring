@@ -4,17 +4,14 @@ use std::time::Duration;
 use config::{Config, ConfigBuilder, File, FileFormat};
 use config::builder::DefaultState;
 
-pub struct Settings {
-    filename: String,
+pub struct Settings<'a> {
+    filename: &'a str,
     config: Config,
 }
 
-impl Settings {
-    pub fn new(filename: String) -> Self {
-        let config = ConfigBuilder::<DefaultState>::default()
-            .add_source(File::new(&filename, FileFormat::Toml))
-            .build()
-            .unwrap();
+impl<'a> Settings<'a> {
+    pub fn new(filename: &'a str) -> Self {
+        let config = Self::create_config(&filename);
 
         Self {
             filename,
@@ -23,19 +20,19 @@ impl Settings {
     }
 
     pub fn refresh(&mut self) {
-        self.config = ConfigBuilder::<DefaultState>::default()
-            .add_source(File::new(&self.filename, FileFormat::Toml))
+        self.config = Self::create_config(self.filename);
+    }
+
+    fn create_config(filename: &str) -> Config {
+        ConfigBuilder::<DefaultState>::default()
+            .add_source(File::new(&filename, FileFormat::Toml))
             .build()
-            .unwrap();
+            .unwrap()
     }
 
-    pub fn get_config(&self) -> &Config {
-        &self.config
-    }
-
-    pub fn parse_duration(&self) -> Result<Duration, Box<dyn Error>> {
+    pub fn duration(&self) -> Result<Duration, Box<dyn Error>> {
         let config_value = self.config.get::<String>("temperature_checks_frequency")?;
-
-        parse_duration::parse(&config_value).map_err(|e| Box::try_from(e).unwrap())
+        
+        parse_duration::parse(&config_value).map_err(|e| Box::from(e))
     }
 }
