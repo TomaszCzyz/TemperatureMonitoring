@@ -1,5 +1,5 @@
 use std::fmt::{Display, Formatter};
-use notify_rust::Notification;
+use notify_rust::{Notification, Timeout};
 
 pub enum Event {
     CloseWindow { temp_outside: f32, temp_inside: f32 },
@@ -34,6 +34,7 @@ impl NotificationManager {
             .summary("Close your windows!")
             .body(&format!("{}", event))
             .icon("firefox")
+            .timeout(Timeout::Milliseconds(1000))
             .show()
             .ok()
     }
