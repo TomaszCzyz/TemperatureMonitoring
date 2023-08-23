@@ -371,7 +371,6 @@ FodyWeavers.xsd
 
 # globs
 Makefile.in
-*.userprefs
 *.usertasks
 config.make
 config.status
@@ -441,7 +440,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # JetBrains Rider
-.idea/
+.idea/**/
 *.sln.iml
 
 ##

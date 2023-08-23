@@ -10,6 +10,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenWindows.iOS", "OpenWind
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenWindows.Browser", "OpenWindows\OpenWindows.Browser\OpenWindows.Browser.csproj", "{17A38F9D-86A2-4638-8E9A-81369F0D12CA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{5580A02C-59DE-4AD6-B307-FA876367D90E}"
+	ProjectSection(SolutionItems) = preProject
+		OpenWindows\.gitignore = OpenWindows\.gitignore
+		OpenWindows\Directory.Build.props = OpenWindows\Directory.Build.props
+		OpenWindows\Settings.XamlStyler = OpenWindows\Settings.XamlStyler
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
