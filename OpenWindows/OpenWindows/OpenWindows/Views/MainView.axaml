@@ -1,15 +1,15 @@
 <UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="OpenWindows.Views.MainView"
+    x:DataType="vm:MainViewModel"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:OpenWindows.ViewModels"
-    x:Class="OpenWindows.Views.MainView"
-    x:DataType="vm:MainViewModel"
-    d:DesignWidth="800"
-    d:DesignHeight="450"
-    mc:Ignorable="d">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.DataContext>
         <vm:MainViewModel />
     </Design.DataContext>
@@ -19,14 +19,14 @@
             <TabItem.HeaderTemplate>
                 <DataTemplate>
                     <avalonia:MaterialIcon
-                        Width="30"
-                        Height="30"
                         Foreground="White"
-                        Kind="Menu" />
+                        Height="30"
+                        Kind="Menu"
+                        Width="30" />
 
                 </DataTemplate>
             </TabItem.HeaderTemplate>
-            <!-- Main Tab -->
+            <!--  Main Tab  -->
             <Panel>
                 <TextBlock Margin="4">
                     This is tab 2 content
@@ -37,10 +37,10 @@
             <TabItem.HeaderTemplate>
                 <DataTemplate>
                     <avalonia:MaterialIcon
-                        Width="30"
-                        Height="30"
                         Foreground="White"
-                        Kind="Settings" />
+                        Height="30"
+                        Kind="Settings"
+                        Width="30" />
 
                 </DataTemplate>
             </TabItem.HeaderTemplate>
@@ -57,28 +57,28 @@
     <!--             </DataTemplate> -->
     <!--         </ItemsControl.ItemTemplate> -->
     <!--     </ItemsControl> -->
-    <!-- <Popup -->
-    <!-- Name="SetSettingPopup" -->
-    <!-- IsLightDismissEnabled="True" -->
-    <!-- Placement="Center"> -->
+    <!--  <Popup  -->
+    <!--  Name="SetSettingPopup"  -->
+    <!--  IsLightDismissEnabled="True"  -->
+    <!--  Placement="Center">  -->
     <!--         <TextBlock Text="Set given setting" /> -->
-    <!--  -->
+    <!--    -->
     <!--     </Popup> -->
     <!-- </Panel> -->
 
 
     <!-- <StackPanel VerticalAlignment="Center"> -->
-    <!-- <TextBlock -->
-    <!-- HorizontalAlignment="Center" -->
-    <!-- VerticalAlignment="Center" -->
-    <!-- Text="{Binding Greeting}" /> -->
-    <!-- <TextBlock -->
-    <!-- HorizontalAlignment="Center" -->
-    <!-- VerticalAlignment="Center" -->
-    <!-- Text="{Binding Greeting}" /> -->
-    <!-- <TextBlock -->
-    <!-- HorizontalAlignment="Center" -->
-    <!-- VerticalAlignment="Center" -->
-    <!-- Text="{Binding Greeting}" /> -->
+    <!--  <TextBlock  -->
+    <!--  HorizontalAlignment="Center"  -->
+    <!--  VerticalAlignment="Center"  -->
+    <!--  Text="{Binding Greeting}" />  -->
+    <!--  <TextBlock  -->
+    <!--  HorizontalAlignment="Center"  -->
+    <!--  VerticalAlignment="Center"  -->
+    <!--  Text="{Binding Greeting}" />  -->
+    <!--  <TextBlock  -->
+    <!--  HorizontalAlignment="Center"  -->
+    <!--  VerticalAlignment="Center"  -->
+    <!--  Text="{Binding Greeting}" />  -->
     <!-- </StackPanel> -->
 </UserControl>
