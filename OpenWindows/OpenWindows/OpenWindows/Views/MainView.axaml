@@ -8,77 +8,33 @@
     xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:OpenWindows.Views"
     xmlns:vm="clr-namespace:OpenWindows.ViewModels"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.DataContext>
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <TabControl Margin="5" TabStripPlacement="Left">
+    <TabControl Margin="0,5" TabStripPlacement="Left">
         <TabItem>
-            <TabItem.HeaderTemplate>
-                <DataTemplate>
-                    <avalonia:MaterialIcon
-                        Foreground="White"
-                        Height="30"
-                        Kind="Menu"
-                        Width="30" />
-
-                </DataTemplate>
-            </TabItem.HeaderTemplate>
-            <!--  Main Tab  -->
-            <Panel>
-                <TextBlock Margin="4">
-                    This is tab 2 content
-                </TextBlock>
-            </Panel>
+            <TabItem.Header>
+                <avalonia:MaterialIcon
+                    Foreground="White"
+                    Height="30"
+                    Kind="Menu"
+                    Width="30" />
+            </TabItem.Header>
+            <views:WelcomeView DataContext="{Binding Path=$parent[TabControl].((vm:MainViewModel)DataContext).WelcomeViewModel, FallbackValue=null}" />
         </TabItem>
         <TabItem>
-            <TabItem.HeaderTemplate>
-                <DataTemplate>
-                    <avalonia:MaterialIcon
-                        Foreground="White"
-                        Height="30"
-                        Kind="Settings"
-                        Width="30" />
-
-                </DataTemplate>
-            </TabItem.HeaderTemplate>
-            <TextBlock Margin="5" Text="Open Windows" />
+            <TabItem.Header>
+                <avalonia:MaterialIcon
+                    Foreground="White"
+                    Height="30"
+                    Kind="Settings"
+                    Width="30" />
+            </TabItem.Header>
+            <views:SettingsView DataContext="{Binding Path=$parent[TabControl].((vm:MainViewModel)DataContext).SettingsViewModel, FallbackValue=null}" />
         </TabItem>
     </TabControl>
-    <!-- <Panel> -->
-    <!--     <ItemsControl ItemsSource="{Binding Settings}"> -->
-    <!--         <ItemsControl.ItemTemplate> -->
-    <!--             <DataTemplate> -->
-    <!--                 <Button HorizontalAlignment="Stretch" Click="Button_OnClick"> -->
-    <!--                     <TextBlock Text="{Binding .}" /> -->
-    <!--                 </Button> -->
-    <!--             </DataTemplate> -->
-    <!--         </ItemsControl.ItemTemplate> -->
-    <!--     </ItemsControl> -->
-    <!--  <Popup  -->
-    <!--  Name="SetSettingPopup"  -->
-    <!--  IsLightDismissEnabled="True"  -->
-    <!--  Placement="Center">  -->
-    <!--         <TextBlock Text="Set given setting" /> -->
-    <!--    -->
-    <!--     </Popup> -->
-    <!-- </Panel> -->
-
-
-    <!-- <StackPanel VerticalAlignment="Center"> -->
-    <!--  <TextBlock  -->
-    <!--  HorizontalAlignment="Center"  -->
-    <!--  VerticalAlignment="Center"  -->
-    <!--  Text="{Binding Greeting}" />  -->
-    <!--  <TextBlock  -->
-    <!--  HorizontalAlignment="Center"  -->
-    <!--  VerticalAlignment="Center"  -->
-    <!--  Text="{Binding Greeting}" />  -->
-    <!--  <TextBlock  -->
-    <!--  HorizontalAlignment="Center"  -->
-    <!--  VerticalAlignment="Center"  -->
-    <!--  Text="{Binding Greeting}" />  -->
-    <!-- </StackPanel> -->
 </UserControl>

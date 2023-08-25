@@ -1,0 +1,39 @@
+﻿<UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="OpenWindows.Views.SettingsView"
+    x:DataType="viewModels:SettingsViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:viewModels="clr-namespace:OpenWindows.ViewModels"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.DataContext>
+        <viewModels:SettingsViewModel />
+    </Design.DataContext>
+    <Panel>
+        <ItemsControl ItemsSource="{ReflectionBinding Settings}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:SettingsEntry">
+                    <Grid ColumnDefinitions="*, Auto" Margin="4">
+                        <TextBlock Grid.Column="0" Text="{ReflectionBinding Name}" />
+                        <ContentControl Content="{Binding Value}" Grid.Column="1">
+                            <ContentControl.DataTemplates>
+                                <DataTemplate x:DataType="system:TimeSpan">
+                                    <TextBlock Text="{Binding Minutes}" />
+                                </DataTemplate>
+                                <DataTemplate x:DataType="system:Single">
+                                    <ButtonSpinner Spin="Spinner_OnSpin">
+                                        <TextBlock Text="{Binding .}" />
+                                    </ButtonSpinner>
+                                </DataTemplate>
+                            </ContentControl.DataTemplates>
+                        </ContentControl>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Panel>
+</UserControl>

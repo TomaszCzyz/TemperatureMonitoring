@@ -21,4 +21,8 @@
     <ItemGroup>
         <ProjectReference Include="..\OpenWindows\OpenWindows.csproj"/>
     </ItemGroup>
+
+    <ItemGroup>
+      <UpToDateCheckInput Remove="Views\SettingsView.axaml" />
+    </ItemGroup>
 </Project>
