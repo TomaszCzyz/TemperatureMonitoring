@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace OpenWindows.ViewModels;
 
-public sealed class SettingsEntry
+public partial class SettingsViewModel : ViewModelBase
 {
-    public required string Name { get; init; }
-    public required object Value { get; set; }
-}
+    [ObservableProperty]
+    private TimeSpan _weatherCheckFrequency = TimeSpan.FromMinutes(5);
 
-public class SettingsViewModel : ViewModelBase
-{
-    public List<SettingsEntry> Settings { get; set; }
-        = new()
-        {
-            new SettingsEntry { Name = "Weather check frequency", Value = TimeSpan.FromMinutes(5) },
-            new SettingsEntry { Name = "Latitude", Value = 50.5f },
-            new SettingsEntry { Name = "Longitude", Value = 60.5f },
-        };
+    [ObservableProperty]
+    private float _latitude = 50.5f;
+
+    [ObservableProperty]
+    private float _longitude = 60.5f;
 }
