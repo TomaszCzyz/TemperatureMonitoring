@@ -1,84 +1,84 @@
 ﻿<UserControl
-  xmlns="https://github.com/avaloniaui"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:viewModels="clr-namespace:OpenWindows.ViewModels"
-  x:Class="OpenWindows.Views.SettingsView"
-  x:DataType="viewModels:SettingsViewModel"
-  d:DesignWidth="800"
-  d:DesignHeight="450"
-  mc:Ignorable="d">
-  <UserControl.Styles>
-    <Style Selector="ButtonSpinner TextBox">
-      <Setter Property="BorderThickness" Value="0" />
-      <Style Selector="^:selected">
-        <Setter Property="BorderThickness" Value="0" />
-      </Style>
-    </Style>
-  </UserControl.Styles>
-  <Design.DataContext>
-    <viewModels:SettingsViewModel />
-  </Design.DataContext>
-  <Panel>
-    <ItemsControl>
-      <Panel>
-        <Label
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Content="Weather Check Frequency"
-          Target="WeatherCheckFrequencyTextBlock" />
+    x:Class="OpenWindows.Views.SettingsView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:OpenWindows.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="viewModels:SettingsViewModel"
+    mc:Ignorable="d">
+    <UserControl.Styles>
+        <Style Selector="ButtonSpinner TextBox">
+            <Setter Property="BorderThickness" Value="0" />
+            <Style Selector="^:selected">
+                <Setter Property="BorderThickness" Value="0" />
+            </Style>
+        </Style>
+    </UserControl.Styles>
+    <Design.DataContext>
+        <viewModels:SettingsViewModel />
+    </Design.DataContext>
+    <Panel>
+        <ItemsControl>
+            <Panel>
+                <Label
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Weather Check Frequency"
+                    Target="WeatherCheckFrequencyTextBlock" />
 
-        <TextBox
-          Name="WeatherCheckFrequencyTextBlock"
-          HorizontalAlignment="Right"
-          Text="{Binding WeatherCheckFrequency}" />
+                <TextBox
+                    Name="WeatherCheckFrequencyTextBlock"
+                    HorizontalAlignment="Right"
+                    Text="{Binding WeatherCheckFrequency}" />
 
-      </Panel>
-      <Panel>
-        <Label
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Content="Longitude"
-          Target="LongitudeTextBlock" />
+            </Panel>
+            <Panel>
+                <Label
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Longitude"
+                    Target="LongitudeTextBlock" />
 
-        <ButtonSpinner HorizontalAlignment="Right" Spin="Spinner_OnSpin">
-          <TextBox Name="LongitudeTextBlock" Text="{Binding Longitude, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" />
-        </ButtonSpinner>
-      </Panel>
-      <Panel>
-        <Label
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Content="Latitude"
-          Target="LatitudeTextBlock" />
+                <ButtonSpinner HorizontalAlignment="Right" Spin="Spinner_OnSpin">
+                    <TextBox Name="LongitudeTextBlock" Text="{Binding Longitude, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" />
+                </ButtonSpinner>
+            </Panel>
+            <Panel>
+                <Label
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Latitude"
+                    Target="LatitudeTextBlock" />
 
-        <ButtonSpinner HorizontalAlignment="Right" Spin="Spinner_OnSpin">
-          <TextBox Name="LatitudeTextBlock" Text="{Binding Latitude, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" />
-        </ButtonSpinner>
-      </Panel>
-    </ItemsControl>
+                <ButtonSpinner HorizontalAlignment="Right" Spin="Spinner_OnSpin">
+                    <TextBox Name="LatitudeTextBlock" Text="{Binding Latitude, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" />
+                </ButtonSpinner>
+            </Panel>
+        </ItemsControl>
 
-    <!-- <ItemsControl ItemsSource="{ReflectionBinding Settings}"> -->
-    <!--     <ItemsControl.ItemTemplate> -->
-    <!--         <DataTemplate x:DataType="viewModels:SettingsEntry"> -->
-    <!--             <Grid Margin="4" ColumnDefinitions="*, Auto"> -->
-    <!--                 <TextBlock Grid.Column="0" Text="{ReflectionBinding Name}" /> -->
-    <!--                 <ContentControl Grid.Column="1" Content="{Binding Value}"> -->
-    <!--                     <ContentControl.DataTemplates> -->
-    <!--                         <DataTemplate x:DataType="system:TimeSpan"> -->
-    <!--                             <TextBlock Text="{Binding Minutes}" /> -->
-    <!--                         </DataTemplate> -->
-    <!--                         <DataTemplate x:DataType="system:Single"> -->
-    <!--                             <ButtonSpinner Spin="Spinner_OnSpin"> -->
-    <!--                                 <TextBlock Text="{Binding ., Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" /> -->
-    <!--                             </ButtonSpinner> -->
-    <!--                         </DataTemplate> -->
-    <!--                     </ContentControl.DataTemplates> -->
-    <!--                 </ContentControl> -->
-    <!--             </Grid> -->
-    <!--         </DataTemplate> -->
-    <!--     </ItemsControl.ItemTemplate> -->
-    <!-- </ItemsControl> -->
-  </Panel>
+        <!-- <ItemsControl ItemsSource="{ReflectionBinding Settings}"> -->
+        <!--     <ItemsControl.ItemTemplate> -->
+        <!--         <DataTemplate x:DataType="viewModels:SettingsEntry"> -->
+        <!--             <Grid Margin="4" ColumnDefinitions="*, Auto"> -->
+        <!--                 <TextBlock Grid.Column="0" Text="{ReflectionBinding Name}" /> -->
+        <!--                 <ContentControl Grid.Column="1" Content="{Binding Value}"> -->
+        <!--                     <ContentControl.DataTemplates> -->
+        <!--                         <DataTemplate x:DataType="system:TimeSpan"> -->
+        <!--                             <TextBlock Text="{Binding Minutes}" /> -->
+        <!--                         </DataTemplate> -->
+        <!--                         <DataTemplate x:DataType="system:Single"> -->
+        <!--                             <ButtonSpinner Spin="Spinner_OnSpin"> -->
+        <!--                                 <TextBlock Text="{Binding ., Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" /> -->
+        <!--                             </ButtonSpinner> -->
+        <!--                         </DataTemplate> -->
+        <!--                     </ContentControl.DataTemplates> -->
+        <!--                 </ContentControl> -->
+        <!--             </Grid> -->
+        <!--         </DataTemplate> -->
+        <!--     </ItemsControl.ItemTemplate> -->
+        <!-- </ItemsControl> -->
+    </Panel>
 </UserControl>
