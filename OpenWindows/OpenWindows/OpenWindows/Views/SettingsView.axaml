@@ -43,7 +43,7 @@
                     Target="LongitudeTextBlock" />
 
                 <ButtonSpinner HorizontalAlignment="Right" Spin="Spinner_OnSpin">
-                    <TextBox Name="LongitudeTextBlock" Text="{Binding Longitude, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" />
+                    <TextBox Name="LongitudeTextBlock" Text="{Binding Longitude, Mode=TwoWay}" />
                 </ButtonSpinner>
             </Panel>
             <Panel>
@@ -54,31 +54,9 @@
                     Target="LatitudeTextBlock" />
 
                 <ButtonSpinner HorizontalAlignment="Right" Spin="Spinner_OnSpin">
-                    <TextBox Name="LatitudeTextBlock" Text="{Binding Latitude, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" />
+                    <TextBox Name="LatitudeTextBlock" Text="{Binding Latitude, Mode=TwoWay}" />
                 </ButtonSpinner>
             </Panel>
         </ItemsControl>
-
-        <!-- <ItemsControl ItemsSource="{ReflectionBinding Settings}"> -->
-        <!--     <ItemsControl.ItemTemplate> -->
-        <!--         <DataTemplate x:DataType="viewModels:SettingsEntry"> -->
-        <!--             <Grid Margin="4" ColumnDefinitions="*, Auto"> -->
-        <!--                 <TextBlock Grid.Column="0" Text="{ReflectionBinding Name}" /> -->
-        <!--                 <ContentControl Grid.Column="1" Content="{Binding Value}"> -->
-        <!--                     <ContentControl.DataTemplates> -->
-        <!--                         <DataTemplate x:DataType="system:TimeSpan"> -->
-        <!--                             <TextBlock Text="{Binding Minutes}" /> -->
-        <!--                         </DataTemplate> -->
-        <!--                         <DataTemplate x:DataType="system:Single"> -->
-        <!--                             <ButtonSpinner Spin="Spinner_OnSpin"> -->
-        <!--                                 <TextBlock Text="{Binding ., Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" /> -->
-        <!--                             </ButtonSpinner> -->
-        <!--                         </DataTemplate> -->
-        <!--                     </ContentControl.DataTemplates> -->
-        <!--                 </ContentControl> -->
-        <!--             </Grid> -->
-        <!--         </DataTemplate> -->
-        <!--     </ItemsControl.ItemTemplate> -->
-        <!-- </ItemsControl> -->
     </Panel>
 </UserControl>

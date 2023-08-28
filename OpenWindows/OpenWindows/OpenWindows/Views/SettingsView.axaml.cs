@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using Avalonia.Controls;
+using OpenWindows.ViewModels;
 
 namespace OpenWindows.Views;
 
@@ -7,6 +8,7 @@ public partial class SettingsView : UserControl
 {
     public SettingsView()
     {
+        DataContext = new SettingsViewModel();
         InitializeComponent();
     }
 

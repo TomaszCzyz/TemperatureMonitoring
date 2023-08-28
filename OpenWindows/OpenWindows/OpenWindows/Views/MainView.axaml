@@ -15,28 +15,31 @@
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <TabControl Margin="0,5" TabStripPlacement="Left">
-        <TabItem>
-            <TabItem.Header>
-                <avalonia:MaterialIcon
-                    Width="30"
-                    Height="30"
-                    Foreground="White"
-                    Kind="Menu" />
+    <Border BorderThickness="0" BorderBrush="Blue">
+        <TabControl Margin="0,5" TabStripPlacement="Left">
+            <TabItem>
+                <TabItem.Header>
+                    <avalonia:MaterialIcon
+                        Width="30"
+                        Height="30"
+                        Foreground="White"
+                        Kind="Menu" />
 
-            </TabItem.Header>
-            <views:WelcomeView DataContext="{Binding Path=$parent[TabControl].((vm:MainViewModel)DataContext).WelcomeViewModel, FallbackValue=null}" />
-        </TabItem>
-        <TabItem>
-            <TabItem.Header>
-                <avalonia:MaterialIcon
-                    Width="30"
-                    Height="30"
-                    Foreground="White"
-                    Kind="Settings" />
+                </TabItem.Header>
+                <views:WelcomeView DataContext="{Binding Path=$parent[TabControl].((vm:MainViewModel)DataContext).WelcomeViewModel, FallbackValue=null}" />
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <avalonia:MaterialIcon
+                        Width="30"
+                        Height="30"
+                        Foreground="White"
+                        Kind="Settings" />
 
-            </TabItem.Header>
-            <views:SettingsView DataContext="{Binding Path=$parent[TabControl].((vm:MainViewModel)DataContext).SettingsViewModel, FallbackValue=null}" />
-        </TabItem>
-    </TabControl>
+                </TabItem.Header>
+                <views:SettingsView />
+                <!--  DataContext="{Binding Path=$parent[TabControl].((vm:MainViewModel)DataContext).SettingsViewModel, FallbackValue=null}"  -->
+            </TabItem>
+        </TabControl>    
+    </Border>
 </UserControl>
